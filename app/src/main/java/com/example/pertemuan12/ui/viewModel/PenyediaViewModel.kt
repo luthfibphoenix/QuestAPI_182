@@ -8,12 +8,15 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.pertemuan12.MahasiswaApplications
 
 
-object PenyediaViewModel{
-    val Factory = viewModelFactory {
-        initializer { HomeViewModel(AplikasiMahasiswa().container.kontakRepository) }
-        initializer { InsertViewModel(AplikasiMahasiswa().container.kontakRepository) }
+object PenyediaViewModel {
+    val factory = viewModelFactory {
+        {
+            initializer { HomeViewModel(aplikasiKontak().container.kontakRepository) }
+            initializer { InsertViewModel(aplikasiKontak().container.kontakRepository) }
+            //initializer{UpdateViewModel(aplikasiKontak().container.kontakRepository)}
+        }
     }
 
-    fun CreationExtras.AplikasiMahasiswa():MahasiswaApplications =
-        (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]as MahasiswaApplications)
+    fun CreationExtras.aplikasiKontak(): MahasiswaApplications =
+        (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MahasiswaApplications)
 }
