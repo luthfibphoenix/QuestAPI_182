@@ -20,6 +20,14 @@ class  NetworkKontakRepository(
     private val kontakApiService: MahasiswaService
 ) : MahasiswaRepository{
 
+
+    override suspend fun getAllMahasiswa(): List<Mahasiswa> =
+        kontakApiService.getAllMahasiswa()
+
+    override suspend fun getMahasiswa(nim: String): Mahasiswa {
+        return kontakApiService.getMahasiswabyNim(nim)
+    }
+
     override suspend fun insertMahasiswa(mahasiswa: Mahasiswa){
         kontakApiService.insertMahasiswa(mahasiswa)
     }
@@ -35,6 +43,8 @@ class  NetworkKontakRepository(
                 response.message()
                 println(response.message())
             }
+        }catch (e:Exception){
+            throw e
         }
     }
 }

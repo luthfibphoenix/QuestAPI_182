@@ -9,7 +9,7 @@ import com.example.pertemuan12.Model.Mahasiswa
 import com.example.pertemuan12.repository.MahasiswaRepository
 import kotlinx.coroutines.launch
 
-class InsertVieModel(private val mahasiswa: MahasiswaRepository) : ViewModel(){
+class InsertViewModel(private val mahasiswa: MahasiswaRepository) : ViewModel(){
     var uiState by mutableStateOf(InsertUiState())
 
     fun updateMahasiswaState(insertUiEvent: InsertUiEvent) {
