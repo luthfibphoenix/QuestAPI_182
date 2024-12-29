@@ -31,8 +31,7 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
                 navController.navigate(DestinasiHome.route) {
                     popUpTo(DestinasiHome.route) { inclusive = true }
                 }
-            }
-            )
+            })
         }
     }
 }
