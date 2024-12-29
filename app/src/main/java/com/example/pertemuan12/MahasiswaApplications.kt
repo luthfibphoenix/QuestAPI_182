@@ -1,4 +1,4 @@
-package com.example.pertemuan12.ui.theme
+package com.example.pertemuan12
 
 import android.app.Application
 import com.example.pertemuan12.Container.AppContainer
