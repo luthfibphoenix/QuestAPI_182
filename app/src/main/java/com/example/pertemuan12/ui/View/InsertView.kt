@@ -20,10 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pertemuan12.CostumeTopAppBar
 import com.example.pertemuan12.ui.Navigasi.DestinasiNavigasi
 import com.example.pertemuan12.ui.viewModel.InsertUiEvent
 import com.example.pertemuan12.ui.viewModel.InsertUiState
+import com.example.pertemuan12.ui.viewModel.InsertViewModel
+import com.example.pertemuan12.ui.viewModel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 object DestinasiEntry: DestinasiNavigasi {
@@ -37,7 +40,7 @@ object DestinasiEntry: DestinasiNavigasi {
 fun EntryMhsScreen(
     navigateBack:()->Unit,
     modifier: Modifier = Modifier,
-    viewModel: InsertViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: InsertViewModel = viewModel(factory = PenyediaViewModel.factory)
 ){
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -54,10 +57,10 @@ fun EntryMhsScreen(
     ) { innerPadding ->
         EntryBody(
             insertUiState = viewModel.uiState,
-            onMahasiswaValueChange = viewModel::updateInsertMhsState,
+            onMahasiswaValueChange = viewModel::updateMahasiswaState,
             onSaveClick = {
                 coroutineScope.launch {
-                    viewModel.insertMhs()
+                    viewModel.insertMahasiswa()
                     navigateBack()
                 }
             },

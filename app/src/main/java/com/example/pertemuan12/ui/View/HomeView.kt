@@ -55,7 +55,7 @@ fun HomeScreen(
     navigateToItemEntry:()->Unit,
     modifier: Modifier =Modifier,
     onDetailClick: (String) -> Unit ={},
-    viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.factory)
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
