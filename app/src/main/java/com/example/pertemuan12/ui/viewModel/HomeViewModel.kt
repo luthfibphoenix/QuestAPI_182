@@ -18,18 +18,18 @@ sealed class HomeUiState {
     object Loading : HomeUiState()
 }
 
-class HomeViewModel (private val mahasiswa: MahasiswaRepository) : ViewModel() {
+class HomeViewModel (private val mhs: MahasiswaRepository) : ViewModel() {
     var mahasiswaUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
     private set
     init {
-        getMahasiswa()
+        getMhs()
     }
 
-    fun getMahasiswa(){
+    fun getMhs(){
         viewModelScope.launch {
             mahasiswaUiState = HomeUiState.Loading
             mahasiswaUiState = try {
-                HomeUiState.Success(mahasiswa.getAllMahasiswa())
+                HomeUiState.Success(mhs.getAllMahasiswa())
             } catch (e: Exception) {
                 HomeUiState.Error
             }catch (e: IOException){
@@ -44,7 +44,7 @@ class HomeViewModel (private val mahasiswa: MahasiswaRepository) : ViewModel() {
         viewModelScope.launch {
             mahasiswaUiState = HomeUiState.Loading
             mahasiswaUiState = try {
-                HomeUiState.Success(mahasiswa.getAllMahasiswa())
+                HomeUiState.Success(mhs.getAllMahasiswa())
             } catch (e: IOException) {
                 HomeUiState.Error
             } catch (e: HttpException) {
