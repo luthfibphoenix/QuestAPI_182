@@ -13,7 +13,7 @@ data class Mahasiswa(
     val nama: String,
     val alamat: String,
 
-    @SerialiName("jenis_kelamin")
+    @SerialName("jenis_kelamin")
     val jenisKelamin: String,
 
     val kelas: String,
