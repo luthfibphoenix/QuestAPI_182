@@ -8,10 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.pertemuan12.ui.View.DestinasiDetail
 import com.example.pertemuan12.ui.View.DestinasiEntry
 import com.example.pertemuan12.ui.View.DestinasiHome
-import com.example.pertemuan12.ui.View.DetailView
 import com.example.pertemuan12.ui.View.EntryMhsScreen
 import com.example.pertemuan12.ui.View.HomeScreen
 
@@ -43,27 +41,6 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
                     }
                 }
             })
-        }
-        composable(
-            route = "${DestinasiDetail.route}/{nim}",
-            arguments = listOf(navArgument("nim") {type = NavType.StringType })
-        ){
-            backStackEntry ->
-            val nim = backStackEntry.arguments?.getString("nim") ?: ""
-            DetailView(
-                nim = nim,
-                navigateBack = {
-                    navController.navigate(DestinasiHome.route){
-                        popUpTo(DestinasiHome.route){
-                            inclusive = true
-                        }
-                    }
-                },
-                onClick = {
-                    navController.navigate("${DestinasiEntry.route}/$nim") {
-                    }
-                }
-            )
         }
     }
 }
