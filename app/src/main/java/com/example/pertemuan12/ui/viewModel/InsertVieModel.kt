@@ -1,7 +1,35 @@
 package com.example.pertemuan12.ui.viewModel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.pertemuan12.Model.Mahasiswa
+import com.example.pertemuan12.repository.MahasiswaRepository
+import kotlinx.coroutines.launch
 
+class InsertVieModel(private val mahasiswa: MahasiswaRepository) : ViewModel(){
+    var uiState by mutableStateOf(InsertUiState())
+
+    fun updateMahasiswaState(insertUiEvent: InsertUiEvent) {
+        uiState = InsertUiState(insertUiEvent = insertUiEvent)
+    }
+
+    suspend fun insertMahasiswa(){
+        viewModelScope.launch {
+            try {
+                mahasiswa.insertMahasiswa(uiState.insertUiEvent.toMahasiswa())
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+    }
+}
+
+data class InsertUiState(
+    val insertUiEvent: InsertUiEvent = InsertUiEvent()
+)
 
 data class InsertUiEvent(
     val nim: String = "",
