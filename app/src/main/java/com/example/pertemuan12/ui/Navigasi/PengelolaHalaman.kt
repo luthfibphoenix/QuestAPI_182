@@ -21,15 +21,22 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         composable(DestinasiHome.route){
             HomeScreen(
                 navigateToItemEntry = {navController.navigate(DestinasiEntry.route)},
-                onDetailClick = {
-
+                onDetailClick = {nim ->
+                    navController.navigate("${DestinasiEntry.route}/$nim"){
+                        popUpTo(DestinasiHome.route) {
+                            inclusive = true
+                        }
+                    }
+                    println("PengelolaHalaman: nim = $nim")
                 }
             )
         }
         composable(DestinasiEntry.route){
             EntryMhsScreen(navigateBack = {
                 navController.navigate(DestinasiHome.route) {
-                    popUpTo(DestinasiHome.route) { inclusive = true }
+                    popUpTo(DestinasiHome.route) {
+                        inclusive = true
+                    }
                 }
             })
         }

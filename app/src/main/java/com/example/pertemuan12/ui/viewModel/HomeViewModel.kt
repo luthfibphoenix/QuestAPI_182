@@ -20,7 +20,7 @@ sealed class HomeUiState {
 
 class HomeViewModel (private val mhs: MahasiswaRepository) : ViewModel() {
     var mahasiswaUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
-    private set
+        private set
     init {
         getMhs()
     }
@@ -42,8 +42,7 @@ class HomeViewModel (private val mhs: MahasiswaRepository) : ViewModel() {
 
     fun deleteMahasiswa(nim: String){
         viewModelScope.launch {
-            mahasiswaUiState = HomeUiState.Loading
-            mahasiswaUiState = try {
+            try {
                 HomeUiState.Success(mhs.getAllMahasiswa())
             } catch (e: IOException) {
                 HomeUiState.Error

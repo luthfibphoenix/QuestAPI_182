@@ -11,12 +11,11 @@ import com.example.pertemuan12.MahasiswaApplications
 object PenyediaViewModel {
     val factory = viewModelFactory {
         {
-            initializer { HomeViewModel(aplikasiKontak().container.kontakRepository) }
-            initializer { InsertViewModel(aplikasiKontak().container.kontakRepository) }
-            //initializer{UpdateViewModel(aplikasiKontak().container.kontakRepository)}
+            initializer { HomeViewModel(AplikasiMahasiswa().container.kontakRepository) }
+            initializer { InsertViewModel(AplikasiMahasiswa().container.kontakRepository) }
         }
     }
 
-    fun CreationExtras.aplikasiKontak(): MahasiswaApplications =
+    fun CreationExtras.AplikasiMahasiswa(): MahasiswaApplications =
         (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MahasiswaApplications)
 }
