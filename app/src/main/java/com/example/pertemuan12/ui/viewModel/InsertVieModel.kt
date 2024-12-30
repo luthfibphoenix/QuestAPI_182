@@ -16,7 +16,7 @@ class InsertViewModel(private val mahasiswa: MahasiswaRepository) : ViewModel(){
         uiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
-    suspend fun insertMahasiswa(){
+    fun insertMahasiswa(){
         viewModelScope.launch {
             try {
                 mahasiswa.insertMahasiswa(uiState.insertUiEvent.toMahasiswa())

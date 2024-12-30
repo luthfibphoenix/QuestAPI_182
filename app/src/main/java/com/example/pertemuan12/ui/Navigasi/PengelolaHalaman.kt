@@ -17,63 +17,48 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         startDestination = DestinasiHome.route,
         modifier = Modifier,
     ) {
+        // Halaman Home
         composable(DestinasiHome.route) {
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
                 onDetailClick = { nim ->
-                    navController.navigate("${DestinasiDetail.route}/$nim") {
-                        popUpTo(DestinasiHome.route) {
-                            inclusive = false
-                        }
-                    }
-                    println("PengelolaHalaman: nim = $nim")
+                    navController.navigate("${DestinasiDetail.route}/$nim")
                 }
             )
         }
 
+        // Halaman Entry Mahasiswa
         composable(route = DestinasiEntry.route) {
-            EntryMhsScreen(navigateBack = {
-                navController.navigate(DestinasiHome.route) {
-                    popUpTo(DestinasiHome.route) {
-                        inclusive = true
-                    }
-                }
-            })
+            EntryMhsScreen(
+                navigateBack = { navController.popBackStack() }
+            )
         }
 
+        // Halaman Detail Mahasiswa
         composable(
-            DestinasiDetail.routeWithArg,
+            route = DestinasiDetail.routeWithArg,
             arguments = listOf(
-                navArgument(DestinasiDetail.NIM) {
-                    type = NavType.StringType
-                }
+                navArgument(DestinasiDetail.NIM) { type = NavType.StringType }
             )
-        ) {
-            val nim = it.arguments?.getString(DestinasiDetail.NIM)
-            nim?.let { nim ->
+        ) { backStackEntry ->
+            val nim = backStackEntry.arguments?.getString(DestinasiDetail.NIM)
+            nim?.let {
                 DetailScreen(
-                    navigateBack = {
-                        navController.navigate(DestinasiHome.route) {
-                            popUpTo(DestinasiHome.route) {
-                                inclusive = true
-                            }
-                        }
-                    },
-                    onEditClick = {
-                        navController.navigate("${DestinasiUpdate.route}/$nim")
-                    }
+                    navigateBack = { navController.popBackStack() },
+                    onEditClick = { navController.navigate("${DestinasiUpdate.route}/$it") }
                 )
             }
         }
 
+        // Halaman Update Mahasiswa
         composable(
-            DestinasiUpdate.routeWithArg,
-            arguments = listOf(navArgument(DestinasiUpdate.NIM) {
-                type = NavType.StringType
-            })
-        ) {
-            val nim = it.arguments?.getString(DestinasiUpdate.NIM)
-            nim?.let { nim ->
+            route = DestinasiUpdate.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiUpdate.NIM) { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val nim = backStackEntry.arguments?.getString(DestinasiUpdate.NIM)
+            nim?.let {
                 UpdateScreen(
                     navigateBack = { navController.popBackStack() },
                     onNavigate = { navController.popBackStack() }
