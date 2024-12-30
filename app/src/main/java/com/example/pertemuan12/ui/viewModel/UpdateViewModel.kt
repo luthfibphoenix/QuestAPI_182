@@ -8,11 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pertemuan12.Model.Mahasiswa
 import com.example.pertemuan12.repository.MahasiswaRepository
+import com.example.pertemuan12.ui.View.DestinasiUpdate
 import kotlinx.coroutines.launch
 
 class UpdateViewModel(
     savedStateHandle: SavedStateHandle,
-    private val mhs: MahasiswaRepository
+    private val mahasiswaRepository: MahasiswaRepository
 ): ViewModel() {
     var uiState by mutableStateOf(InsertUiState())
         private set
@@ -35,6 +36,12 @@ class UpdateViewModel(
                 e.printStackTrace()
             }
         }
+    }
+
+    fun updateState(insertUiEvent: InsertUiEvent) {
+        uiState = InsertUiState(
+            insertUiEvent = insertUiEvent
+        )
     }
 }
 
