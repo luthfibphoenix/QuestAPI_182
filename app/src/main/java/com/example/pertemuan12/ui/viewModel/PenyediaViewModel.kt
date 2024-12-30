@@ -10,10 +10,10 @@ import com.example.pertemuan12.MahasiswaApplications
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
-        initializer { HomeViewModel(AplikasiMahasiswa().container.kontakRepository) }
-        initializer { InsertViewModel(AplikasiMahasiswa().container.kontakRepository) }
-        initializer { DetailViewModel(createSavedStateHandle(),AplikasiMahasiswa().container.kontakRepository) }
-        initializer { UpdateViewModel(createSavedStateHandle(),AplikasiMahasiswa().container.kontakRepository) }
+        initializer { HomeViewModel(AplikasiMahasiswa().container.mahasiswaRepository) }
+        initializer { InsertViewModel(AplikasiMahasiswa().container.mahasiswaRepository) }
+        initializer { DetailViewModel(createSavedStateHandle(),AplikasiMahasiswa().container.mahasiswaRepository) }
+        initializer { UpdateViewModel(createSavedStateHandle(),AplikasiMahasiswa().container.mahasiswaRepository) }
     }
 }
 

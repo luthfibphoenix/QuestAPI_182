@@ -7,7 +7,7 @@ interface MahasiswaRepository{
 
     suspend fun getAllMahasiswa(): List<Mahasiswa>
 
-    suspend fun getMahasiswa(nim: String): Mahasiswa
+    suspend fun getMahasiswaByID(nim: String): Mahasiswa
 
     suspend fun insertMahasiswa(mahasiswa: Mahasiswa)
 
@@ -24,7 +24,7 @@ class  NetworkKontakRepository(
     override suspend fun getAllMahasiswa(): List<Mahasiswa> =
         kontakApiService.getAllMahasiswa()
 
-    override suspend fun getMahasiswa(nim: String): Mahasiswa {
+    override suspend fun getMahasiswaByID(nim: String): Mahasiswa {
         return kontakApiService.getMahasiswabyNim(nim)
     }
 

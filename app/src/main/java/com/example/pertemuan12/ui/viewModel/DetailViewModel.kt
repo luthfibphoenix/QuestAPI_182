@@ -46,7 +46,7 @@ class DetailViewModel(
         viewModelScope.launch {
             mhsUiState = DetailUiState.Loading
             mhsUiState = try {
-                DetailUiState.Success(mhs.getMahasiswa(_nim))
+                DetailUiState.Success(mhs.getMahasiswaByID(_nim))
             } catch (e: IOException) {
                 DetailUiState.Error
             } catch (e: HttpException) {

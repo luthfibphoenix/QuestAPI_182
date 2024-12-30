@@ -22,7 +22,7 @@ class UpdateViewModel(
 
     init {
         viewModelScope.launch {
-            val mahasiswa = mahasiswaRepository.getMahasiswa(_nim)
+            val mahasiswa = mahasiswaRepository.getMahasiswaByID(_nim)
             uiState = mahasiswa.toUiStateMhsUpdate()
         }
     }
