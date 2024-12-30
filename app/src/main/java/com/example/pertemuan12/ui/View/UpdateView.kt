@@ -27,7 +27,7 @@ object DestinasiUpdate : DestinasiNavigasi {
 @Composable
 fun UpdateScreen(
     modifier: Modifier = Modifier,
-    viewModel: UpdateViewModel = viewModel(factory = PenyediaViewModel.factory),
+    viewModel: UpdateViewModel = viewModel(factory = PenyediaViewModel.Factory),
     navigateBack: () -> Unit,
     onNavigate: () -> Unit
 ){

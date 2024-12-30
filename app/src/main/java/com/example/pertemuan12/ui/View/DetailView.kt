@@ -38,7 +38,7 @@ object DestinasiDetail: DestinasiNavigasi {
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
-    viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.factory),
+    viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.Factory),
     navigateBack: () -> Unit,
     onEditClick: (String) -> Unit = {}
 ){

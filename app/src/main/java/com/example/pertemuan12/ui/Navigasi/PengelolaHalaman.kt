@@ -7,7 +7,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.pertemuan12.ui.View.DestinasiDetail
 import com.example.pertemuan12.ui.View.DestinasiEntry
 import com.example.pertemuan12.ui.View.DestinasiHome
@@ -16,7 +15,6 @@ import com.example.pertemuan12.ui.View.DetailScreen
 import com.example.pertemuan12.ui.View.EntryMhsScreen
 import com.example.pertemuan12.ui.View.HomeScreen
 import com.example.pertemuan12.ui.View.UpdateScreen
-import com.example.pertemuan12.ui.viewModel.UpdateViewModel
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()){
