@@ -36,7 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pertemuan12.CostumeTopAppBar
+import com.example.pertemuan12.customwidget.CostumeTopAppBar
 import com.example.pertemuan12.Model.Mahasiswa
 import com.example.pertemuan12.R
 import com.example.pertemuan12.ui.Navigasi.DestinasiNavigasi
