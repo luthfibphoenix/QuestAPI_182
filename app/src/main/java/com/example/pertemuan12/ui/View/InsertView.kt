@@ -111,15 +111,6 @@ fun FormInput(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         OutlinedTextField(
-            value = insertUiEvent.nama,
-            onValueChange = {onValueChange(insertUiEvent.copy(nama = it))},
-            label = { Text("Nama") },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true
-        )
-
-        OutlinedTextField(
             value = insertUiEvent.nim,
             onValueChange = {onValueChange(insertUiEvent.copy(nim = it))},
             label = { Text("NIM") },
@@ -129,9 +120,9 @@ fun FormInput(
         )
 
         OutlinedTextField(
-            value = insertUiEvent.jenisKelamin,
-            onValueChange = {onValueChange(insertUiEvent.copy(jenisKelamin = it))},
-            label = { Text("Jenis Kelamin") },
+            value = insertUiEvent.nama,
+            onValueChange = {onValueChange(insertUiEvent.copy(nama = it))},
+            label = { Text("Nama") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true
@@ -141,6 +132,15 @@ fun FormInput(
             value = insertUiEvent.alamat,
             onValueChange = {onValueChange(insertUiEvent.copy(alamat = it))},
             label = { Text("Alamat") },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true
+        )
+
+        OutlinedTextField(
+            value = insertUiEvent.jenisKelamin,
+            onValueChange = {onValueChange(insertUiEvent.copy(jenisKelamin = it))},
+            label = { Text("Jenis Kelamin") },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
             singleLine = true

@@ -1,10 +1,7 @@
 package com.example.pertemuan12.Model
 
-
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-import kotlinx.serialization.descriptors.*
-import kotlinx.serialization.encoding.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
 @Serializable
@@ -15,7 +12,6 @@ data class Mahasiswa(
 
     @SerialName("jenis_kelamin")
     val jenisKelamin: String,
-
     val kelas: String,
     val angkatan: String
 )

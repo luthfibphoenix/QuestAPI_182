@@ -7,34 +7,31 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.pertemuan12.ui.View.DestinasiDetail
-import com.example.pertemuan12.ui.View.DestinasiEntry
-import com.example.pertemuan12.ui.View.DestinasiHome
-import com.example.pertemuan12.ui.View.DestinasiUpdate
-import com.example.pertemuan12.ui.View.DetailScreen
-import com.example.pertemuan12.ui.View.EntryMhsScreen
-import com.example.pertemuan12.ui.View.HomeScreen
-import com.example.pertemuan12.ui.View.UpdateScreen
+import androidx.navigation.navArgument
+import com.example.pertemuan12.ui.View.*
 
 @Composable
-fun PengelolaHalaman(navController: NavHostController = rememberNavController()){
+fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
         startDestination = DestinasiHome.route,
         modifier = Modifier,
-    ){
-        composable(DestinasiHome.route){
+    ) {
+        composable(DestinasiHome.route) {
             HomeScreen(
-                navigateToItemEntry = {navController.navigate(DestinasiEntry.route)},
-                onDetailClick = {nim ->
-                    navController.navigate("${DestinasiEntry.route}/$nim")
+                navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
+                onDetailClick = { nim ->
+                    navController.navigate("${DestinasiDetail.route}/$nim") {
+                        popUpTo(DestinasiHome.route) {
+                            inclusive = false
+                        }
+                    }
                     println("PengelolaHalaman: nim = $nim")
                 }
             )
         }
 
-
-        composable(DestinasiEntry.route){
+        composable(route = DestinasiEntry.route) {
             EntryMhsScreen(navigateBack = {
                 navController.navigate(DestinasiHome.route) {
                     popUpTo(DestinasiHome.route) {
@@ -44,22 +41,44 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             })
         }
 
-        composable(DestinasiDetail.routeWithArg) { backStackEntry ->
-            val nim = backStackEntry.arguments?.getString(DestinasiDetail.NIM) ?: ""
-            DetailScreen(
-                navigateBack = { navController.navigateUp() },
-                onEditClick = {
-                    navController.navigate("${DestinasiUpdate.route}/$nim")
+        composable(
+            DestinasiDetail.routeWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetail.NIM) {
+                    type = NavType.StringType
                 }
             )
+        ) {
+            val nim = it.arguments?.getString(DestinasiDetail.NIM)
+            nim?.let { nim ->
+                DetailScreen(
+                    navigateBack = {
+                        navController.navigate(DestinasiHome.route) {
+                            popUpTo(DestinasiHome.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    onEditClick = {
+                        navController.navigate("${DestinasiUpdate.route}/$nim")
+                    }
+                )
+            }
         }
 
-        composable(DestinasiUpdate.routeWithArg){ backStackEntry ->
-            val nim = backStackEntry.arguments?.getString(DestinasiUpdate.NIM) ?: ""
-            UpdateScreen(
-                navigateBack = { navController.navigateUp() },
-                onNavigate = { navController.navigate(DestinasiHome.route) }
-            )
+        composable(
+            DestinasiUpdate.routeWithArg,
+            arguments = listOf(navArgument(DestinasiUpdate.NIM) {
+                type = NavType.StringType
+            })
+        ) {
+            val nim = it.arguments?.getString(DestinasiUpdate.NIM)
+            nim?.let { nim ->
+                UpdateScreen(
+                    navigateBack = { navController.popBackStack() },
+                    onNavigate = { navController.popBackStack() }
+                )
+            }
         }
     }
 }
