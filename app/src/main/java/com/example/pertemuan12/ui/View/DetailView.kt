@@ -2,16 +2,87 @@ package com.example.pertemuan12.ui.View
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan12.customwidget.CostumeTopAppBar
 import com.example.pertemuan12.Model.Mahasiswa
+import com.example.pertemuan12.ui.Navigasi.DestinasiNavigasi
+import com.example.pertemuan12.ui.viewModel.DetailUiState
+import com.example.pertemuan12.ui.viewModel.DetailViewModel
+import com.example.pertemuan12.ui.viewModel.PenyediaViewModel
+
+object DestinasiDetail: DestinasiNavigasi {
+    override val route = "item_detail"
+    override val titleRes = "Detail Mhs"
+    const val NIM = "nim"
+    val routeWithArg = "$route/{$NIM}"
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetailScreen(
+    modifier: Modifier = Modifier,
+    viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.factory),
+    navigateBack: () -> Unit,
+    onEditClick: (String) -> Unit = {}
+){
+    Scaffold (
+        modifier = modifier,
+        topBar = {
+            CostumeTopAppBar(
+                title = DestinasiDetail.titleRes,
+                canNavigateBack = true,
+                navigateUp = navigateBack
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {onEditClick(viewModel.mhsUiState.toString())},
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(17.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit")
+            }
+        },
+    ){
+        innerPadding ->
+        Column (
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+        ){
+            when (val state = viewModel.mhsUiState){
+                is DetailUiState.Loading -> {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Start))
+                }
+                is DetailUiState.Error -> {
+                    Text("Error saat memuat data", modifier = Modifier.align(Alignment.Start))
+                }
+                is DetailUiState.Success -> {
+                    ItemDetailMahasiswa(mahaasiswa = state.mahasiswa)
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun ItemDetailMahasiswa(
